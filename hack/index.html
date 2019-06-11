@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+header{
+width:;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  height: 57px;
+}
+
+li {
+  float: right;
+}
+#fin{
+	position: relative;
+	right: 700px;
+	font-size: 18px;
+	color:red;
+}
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+.parallax {
+  /* The image used */
+  background-image: url("bg1.jpg");
+opacity: 0.85;
+  /* Set a specific height */
+  min-height: 600px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.parallax1 {
+  /* The image used */
+  background-image: url("bg2.jpg");
+    background-repeat: no-repeat;
+  background-size: cover;
+  height:500px;}
+  .foot{
+  	height: 150px;
+  }
+  
+  
+  .button {
+  border-radius: 4px;
+  background-color: black;
+  border: none;
+  color:white;
+  text-align: center;
+  font-size: 24px;
+  padding: 40px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 250px;
+  margin-right:120px;
+  margin-bottom:300px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+<
+</style>
+</head>
+<body>
+
+
+<header>
+
+<ul>
+	<img src="lo.jpg" alt="logo" style="height: 57px" />
+
+  <li><a  href="#home">About</a></li>
+  <li><a href="login.php">Login</a></li>
+  <li><a href="regf.php">Register</a></li>
+  <li><a href="index.html">Home</a></li>
+  <li id="fin"><a href=""> FINANCE MANAGER</a></li>
+</ul>
+
+
+</header>
+
+<div class="parallax"></div>
+
+<div class="parallax1">
+<button class="button" ><a href="regf.php" style="color:white;"><span>REGISTER </span></a></button>
+<button class="button"><span><a href="login.php" style="color:white;">LOGIN</span></button></a>
+</div>
+<div class="parallax"></div>
+
+</body>
+</html>

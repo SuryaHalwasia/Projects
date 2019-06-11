@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style> 
+
+h1
+{
+color:black;
+font-family: comic sans MS;
+font-size: 300%;
+text-align: center;
+background-color:lightgrey;
+
+}
+
+h1
+{
+color:black;
+font-family: comic sans MS;
+font-size: 200%;
+text-align: center;
+background-color:lightgrey;
+
+}
+
+.ani{
+  width: 250px;
+  height: 100px;
+  background: black;
+  transition: width 2s, height 2s, transform 2s;
+  color:white;
+  text-align: center;
+  margin-left:10px;
+  margin-top:10px;
+  position:center;
+  margin-right:200px;
+  margin-bottom:10px;
+
+}
+
+.ani:hover {
+  width: 250px;
+  height: 120px;
+  text-align: center;
+
+}
+ul{
+ margin:0;
+ list-style-type: none;
+ }
+
+li {
+  float: right;
+}
+
+
+  
+.btn1{
+font-size:50px;
+font-family:verdana;
+color:black;
+cursor: pointer;
+  border-radius: 15px;
+  text-align: center;
+  padding: 16px 30px;
+  border: none;
+  
+}
+.btn1:hover{ background-color:black;
+color:white;}
+}
+
+
+table {
+  margin-left:0px;
+  margin-right:300px;
+  margin-top:0px;
+  margin-bottom:300px;
+  
+  
+  border-collapse: collapse;
+  width: 50%;
+  border-radius: 25px;
+  border:300px; 
+  background-color:url("bg1.jpg");
+  position: absolute;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+tr{background-color: #f2f2f2}
+
+th {
+  background-color:#3333cc;
+  color: white;
+}
+body{
+	background-color:#D3D3D3;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+    background-size: cover;
+	min-height: 50px;
+	margin:0;
+
+}
+
+input[type=text] {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-color: black;
+  text-size:18px;
+}	
+
+</style>
+
+<body>
+<header>
+<h1>
+My profile
+</h1>
+</header>
+<section>
+<ul>
+<li>
+<div class="ani">
+<h2>Chatbot</h2>
+</div>
+</li>
+<li>
+<div class="ani">
+<h2>Personal Goals</h2>
+</div>
+</li>
+
+<ul>
+<li>
+<div class="ani">
+<h2>Record Expenses</h2>
+</div>
+</li>
+<li>
+<div class="ani">
+<h2>Bill</h2>
+</div>
+<li>
+<ul>
+<li>
+<div class="ani">
+<h2>Estimation</h2>
+</div>
+</li>
+</ul>
+</section>
+
+
+<form method="post">
+<?php  
+$db = mysqli_connect("localhost", "root", '', "finance");
+ # Prepare the SELECT Query
+  $selectSQL = "SELECT name, n_budget, w_budget, s_budget FROM user where u_name='komal_12'" ;
+ # Execute the SELECT Query
+ $selectRes = mysqli_query( $db,$selectSQL );
+ ?>
+<br><br><center><table border="10" width="500px" height="300px" style="background:black;color:black;font-family:comic sans MS; font-size:25px;">
+  <thead>
+    <tr>
+      <th height="30px" >Name</th>
+	  <?php
+		while( $row = mysqli_fetch_assoc( $selectRes ) ){
+          echo "<th>{$row["name"]}</th>";
+        }
+      ?>
+	  <th>Update</th>
+	</tr>
+	<tr>
+	  <td height="30px">Need</td>
+	  <?php
+	  $selectRes = mysqli_query( $db,$selectSQL );
+		while( $row = mysqli_fetch_assoc( $selectRes ) ){
+          echo "<td>{$row["n_budget"]}</td>";
+        }
+		?>
+		<td><font color="yellow"><input type="text" onchange="ne()" name="need" id="need"></td>
+	</tr>
+	
+	<tr>
+	<td height="30px">Want</td>
+	  <?php
+	  $selectRes = mysqli_query( $db,$selectSQL );
+		while( $row = mysqli_fetch_assoc( $selectRes ) ){
+          echo "<td>{$row["w_budget"]}</td>";
+        }
+		?>
+		<td><font color="yellow"><input type="text" name="want" onchange="we" id="want"></td>
+		</font>
+	</tr>
+	
+	<tr>
+	<td height="30px">Savings</td>
+	  <?php
+	  $selectRes = mysqli_query( $db,$selectSQL );
+		while( $row = mysqli_fetch_assoc( $selectRes ) ){
+          echo "<td>{$row["s_budget"]}</td>";
+        }
+		?>
+		<td><font color="yellow"><input type="text" name="save" onchange="se" id="save"></td>
+	</tr>
+	
+	
+  </thead>
+  </table>
+  <div>
+  <h1><input type="submit" name="submit" class="btn1"></h1>
+  </div>
+  <?php 
+	
+	$db = mysqli_connect("localhost","root", "", "finance"); // Establishing Connection with Server
+	
+    if (isset($_POST['submit'])) { //to check if the form was submitted
+        $need= $_POST['need'];
+		$want= $_POST['want'];
+		$save= $_POST['save'];
+    
+	$query = "update user set n_budget='$need',w_budget='$want',s_budget='$save' where u_name='komal_12'";
+	if(mysqli_query($db, $query)){
+		echo "<br/><br/><span>Data Updated successfully...!!</span>";
+	}
+	else
+	{
+		echo "error:".$query."<br>".mysqli_error($db);
+		}
+	}
+?>
+
+ </div> 
+ </div>
+</form>
+<script>
+var n=document.getElementById("need");
+var s=document.getElementById("save");
+var w=document.getElementById("want");
+n.value="50";
+s.value="20";
+w.value="30";
+function ne(){
+	if(n.value>=100){
+		n.value=100;
+		s.value=0;
+		w.value=0;
+	}
+	else
+	s.value=100-n.value-w.value;
+		if(s.value<0)
+		{
+			s.value=0;
+			w.value=100-n.value;
+		}
+	}
+function we(){
+		if(w.value>=100){
+		w.value=100;
+		s.value=0;
+		n.value=0;
+	}
+	else
+	s.value=100-n.value-w.value;
+		if(s.value<0)
+		{
+			s.value=0;
+			n.value=100-w.value;
+		}
+}
+function se(){
+	
+		if(s.value>=100){
+		s.value=100;
+		n.value=0;
+		w.value=0;
+	}
+	else n.value=100-w.value-s.value;
+			if(n.value<0)
+		{
+			n.value=0;
+			w.value=100-s.value;
+		}
+}
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
+
+
+
