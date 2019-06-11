@@ -1,0 +1,90 @@
+<html>
+<head>
+<style>
+body{
+background-image:url("comps.jpg");
+}
+button{
+background-color:#ccffff;
+}
+#hide{
+visibility:hidden;
+}
+</style>
+</head>
+<body>
+<br/>
+<br/>
+<center>
+<button id="sjf" onclick="sjf()">SJF</button>
+<button id="prior" onclick="prior()">Priority Sheduling</button>
+</center>
+<br/>
+<br/>
+<br/>
+<div id="hide">
+<center>
+	<label>Enter the number of processes</label>
+	<input type="text"  id="b1" />
+	<br/>
+	<button id="send" onclick="send()">Enter</button>
+	</center>
+</div>
+<script>
+var flag;
+function sjf()
+{
+	flag=0;
+	document.getElementById("hide").style.visibility="visible";
+}
+function prior()
+{
+flag=1;
+document.getElementById("hide").style.visibility="visible";
+}
+function send()
+{
+	var v1=document.getElementById("b1").value;
+	if(flag==0)
+	{
+		if(v1==4)
+		{
+			window.open("Sjf4.html"); 
+		}
+		else if(v1==5)
+		{
+			window.open("Sjf5.html");
+		}
+		else if(v1==6)
+		{
+			window.open("Sjf6.html");
+		}
+		else
+		{
+			alert("Processes between 4 and 7 only");
+		}
+	}
+	else
+	{
+		if(v1==4)
+		{
+			window.open("Prior4.html"); 
+		}
+		else if(v1==5)
+		{
+			window.open("Prior5.html");
+		}
+		else if(v1==6)
+		{
+			window.open("Prior6.html");
+		}
+		else
+		{
+			alert("Processes between 4 and 7 only");
+		}
+	}
+}		
+
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<html>
+<head>
+<style>
+label{
+position:relative;
+left:400px;
+}
+#clic{
+position:relative;
+left:440px;
+}
+.pro1{
+position:relative;
+left:400px;
+width:50px;
+}
+body{
+background-image:url("comps.jpg");
+}
+#this{
+border:1px solid black;
+padding:5px;
+}
+th{
+border:1px solid black;
+padding:5px;
+text-align:center;
+margin:5px;
+}
+td{
+border:1px solid black;
+padding:5px;
+text-align:center;
+empty-cells:show;
+}
+td{
+empty-cells:show;
+text-align:center;
+}
+#hide{
+visibility:hidden;
+}
+.shift{
+position:relative;
+left:25px;
+}
+.rem{
+border:0px;
+}
+.rem1{
+position:relative;
+left:25px;
+}
+#shiftaa{
+	border:1px solid blue;
+	}
+#fir{
+text-align:left;
+position:relative;
+right:0px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+<center><b>PRIORITY SHEDULING</b></center>
+<br/> <br/>
+
+<div id="hid1">
+<label>Enter the burst time and priority for process 1</label>
+<input type="text" name="pro11" class="pro1" id="b1" />
+<input type="text" name="pro12" class="pro1" id="a1" />
+<br/>
+<label>Enter the burst time and priority for process 2</label>
+<input type="text" name="pro21" class="pro1" id="b2" />
+<input type="text" name="pro22" class="pro1" id="a2" />
+<br/>
+<label>Enter the burst time and priority for process 3</label>
+<input type="text" name="pro31" class="pro1" id="b3" />
+<input type="text" name="pro32" class="pro1" id="a3" />
+<br/>
+<label>Enter the burst time and priority for process 4</label>
+<input type="text" name="pro41" class="pro1" id="b4" />
+<input type="text" name="pro42" class="pro1" id="a4" />
+<br/>
+<label>Enter the burst time and priority for process 5</label>
+<input type="text" name="pro41" class="pro1" id="b5" />
+<input type="text" name="pro42" class="pro1" id="a5" />
+<br/>
+<center><button id="ok" onclick="re(); return false;">OK</button></center>
+</div>
+<div id="hide"><br/> <br/> <br/>
+<center>
+<table id="this">
+<tr>
+<th>Process</th>
+<th>Turnaround Time</th>
+<th>Waiting Time</th>
+</tr>
+<tr>
+<td id="a11">1</td>
+<td id="a21"> 2</td>
+<td id="a31"> 3</td>
+</tr>
+<tr>
+<td id="a12"> 2</td>
+<td id="a22"> 2</td>
+<td id="a32"> 3</td>
+</tr>
+<tr>
+<td id="a13"> 3</td>
+<td id="a23"> 2</td>
+<td id="a33"> 3</td>
+</tr>
+<tr>
+<td id="a14"> 4</td>
+<td id="a24"> 2</td>
+<td id="a34"> 3</td>
+</tr>
+<tr>
+<td id="a15"> 5</td>
+<td id="a25"> 2</td>
+<td id="a35"> 3</td>
+</tr>
+</table>
+</center>
+<br/>
+<br/>
+<br/>
+<b>GANTT CHART</b>
+<table >
+<tr>
+<td class="shift" id="P1">P1</td>
+<td class="shift" id="P2">P2</td>
+<td class="shift"id="P3">P3</td>
+<td class="shift"id="P4">P4</td>
+<td class="shift"id="P5">P5</td>
+</tr>
+<tr id="shifte">
+<div id="fir"><td class="rem" align="left">0</td><div>
+<td id="p1" class="rem",class="rem1" >0</td>
+<td id="p2" class="rem",class="rem1">0</td>
+<td id="p3" class="rem",class="rem1">0</td>
+<td id="p4" class="rem">0</td>
+<td id="p5" class="rem">0</td>
+</div>
+<br /><br/><br/>
+<center>
+<h4><b>Average Turnaround Time=</b><i id="tt">4</i></h4>
+<h4><b>Average Waiting Time=</b><i id="wt">4</i></h4>
+<script>
+
+var prior=[];
+var burstie=[];
+var p=[];
+var turnie=[];
+var waitie=[];
+var a=[];
+var awt,atat;
+var arr=[0,1,2,3,4,5];
+function re()
+{	
+	document.getElementById("hide").style.visibility="visible";
+	for(var i=1; i<6; i++)
+	{
+		var s='b'+i;
+		var s1='a'+i;
+		var d=document.getElementById(s).value;
+		d=parseInt(d);
+		var d1=document.getElementById(s1).value;
+		d1=parseInt(d1);
+		burstie[i]=d;
+		prior[i]=d1;
+	}
+	for(var i=1;i<5;i++)
+	{
+		for(var j=i+1;j<6;j++)
+		{	
+			if(parseInt(prior[i])>parseInt(prior[j]))
+			{
+				prior[i]=parseInt(prior[i]);
+				var x=prior[i];
+				var y;
+				prior[j]=parseInt(prior[j]);
+				prior[i]=prior[j];
+				prior[j]=x;
+				x=burstie[i];
+				burstie[i]=burstie[j];
+				burstie[j]=x;
+				x=p[i];
+				p[i]=p[j];
+				p[j]=x;
+				y=arr[i];
+				arr[i]=arr[j];
+				arr[j]=y;
+				
+			}
+		}
+	}
+	waitie[1]=0;
+	awt=0;
+	turnie[1]=burstie[1];
+	atat=turnie[1];
+	for(var i=2;i<6;i++)
+	{
+		waitie[i]=turnie[i-1];
+		awt=awt+waitie[i];
+		turnie[i]=waitie[i]+burstie[i];
+		atat=atat+turnie[i];
+	}
+		for(var i=1; i<=5; i++)
+	{
+		var s='a2'+i;
+		var t='a3'+i;
+		var u='p'+i;
+		var no=25;
+		var d=document.getElementById(s);
+		var e=document.getElementById(t);
+		var f=document.getElementById(u);
+		d.innerHTML=turnie[i];
+		f.innerHTML=turnie[i];
+		e.innerHTML=waitie[i];
+		var w="P"+i;
+		var v="p"+i;
+		var v1=document.getElementById(v);
+		var w1=document.getElementById(w);
+		w1.innerHTML="P"+arr[i];
+		if(i==1){
+		var s=turnie[i];}
+		else
+		{
+		var s=turnie[i]-turnie[i-1];
+		if(i!=1){
+		v1.style.left=String(s)+"px";
+		}
+		if(i==1)
+		{
+		v1.style.right=String(s)+"px";
+		}
+		}
+		w1.style.width=String(s)+"em";
+	}
+	var w=document.getElementById("tt");
+	atat=atat/5;
+	w.innerHTML=atat;
+	var w1=document.getElementById("wt");
+	awt=awt/5;
+	w1.innerHTML=awt;
+	
+}
+
+
+</script>
+</body>
+</html>
