@@ -12,9 +12,6 @@ from gtts import gTTS
 import os
 root=Tk()
 flag=0
-accountSID='ACe66b77535ede54f3e2a7bcf5efb49b91'
-myTwilioNumber="+12014307514"
-myCellPhone="+919320372678"
 pygame.init()
 pygame.mixer.init()
 root.state("zoomed")
